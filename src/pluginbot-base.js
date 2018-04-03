@@ -94,12 +94,15 @@ class PluginbotBase {
                 }
             };
 
+            let _reducerOpts = {};
+            Object.assign(_reducerOpts, reducers);
 
-            let initialReducer = combineReducers({
-                ...reducers,
-                pluginbot: pluginbotReducer
-            });
-
+            // let initialReducer = combineReducers({
+            //     ...reducers,
+            //     pluginbot: pluginbotReducer
+            // });
+            _reducerOpts.pluginbot = pluginbotReducer;
+            let initialReducer = combineReducers(_reducerOpts);
 
             this.sagaMiddleware = sagaMiddleware;
             this.store = createStore(initialReducer, applyMiddleware(...middleware, sagaMiddleware));
